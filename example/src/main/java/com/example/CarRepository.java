@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import static java.util.stream.Collectors.toList;
+
 public class CarRepository {
 
     private Map<String, Car> cars = new HashMap<>();
@@ -23,6 +25,8 @@ public class CarRepository {
     }
 
     public List<Car> findByColor(String color) {
-        return null;
+        return cars.values().stream()
+                .filter(car -> color.equals(car.getColor()))
+                .collect(toList());
     }
 }
