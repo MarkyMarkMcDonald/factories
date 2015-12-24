@@ -4,10 +4,9 @@ import com.example.Car;
 import com.example.CarBuilder;
 import com.example.CarRepository;
 import com.example.RoofType;
+import com.factories.EntityFactory;
 
-import java.util.function.Function;
-
-public class CarFactory {
+public class CarFactory implements EntityFactory<Car, CarBuilder> {
 
     private CarRepository carRepository;
 
@@ -15,15 +14,18 @@ public class CarFactory {
         this.carRepository = carRepository;
     }
 
-    public Car create(Function<? super CarBuilder, ? extends CarBuilder> overrides) {
-        CarBuilder carBuilder = new CarBuilder().roofType(RoofType.HARDTOP);
-
-        Car car = overrides.apply(carBuilder).build();
-
+    @Override
+    public Car save(Car car) {
         return carRepository.save(car);
     }
 
-    public Car create() {
-        return create(overrides -> overrides);
+    @Override
+    public Class<CarBuilder> builderClass() {
+        return CarBuilder.class;
+    }
+
+    @Override
+    public CarBuilder defaultBuilder() {
+        return new CarBuilder().roofType(RoofType.HARDTOP);
     }
 }
