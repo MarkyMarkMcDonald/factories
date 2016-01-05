@@ -20,11 +20,6 @@ public class CarFactory implements EntityFactory<Car, CarBuilder> {
     }
 
     @Override
-    public Class<CarBuilder> builderClass() {
-        return CarBuilder.class;
-    }
-
-    @Override
     public CarBuilder defaultBuilder() {
         return new CarBuilder().roofType(RoofType.HARDTOP);
     }

@@ -1,10 +1,12 @@
 package com.example;
 
 import com.example.factories.CarFactory;
+import com.factories.Builder;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,8 +23,8 @@ public class CarRepositoryTest {
 
     @Test
     public void testFindByColor() throws Exception {
-        Car savedRedCar = carFactory.create(car -> car.color("red"));
-        Car savedBlueCar = carFactory.create(car -> car.color("blue"));
+        Car savedRedCar = carFactory.create(carBuilder -> carBuilder.color("red"));
+        Car savedBlueCar = carFactory.create(carBuilder -> carBuilder.color("blue"));
 
         List<Car> redCars = carRepository.findByColor("red");
 

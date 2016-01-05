@@ -1,6 +1,8 @@
 package com.example;
 
-public class CarBuilder {
+import com.factories.Builder;
+
+public class CarBuilder implements Builder<Car> {
 
     private final Car car;
 
